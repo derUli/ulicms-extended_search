@@ -3,7 +3,7 @@
 	"version" : "0.1",
 	"embed" : false,
 	"controllers" : {
-	"SearchController" : "controllers/search_controllers"
+	"SearchController" : "controllers/search_controller"
 	},
 	"objects" : {
 	"SearchController" : "objects/search_indexer"
