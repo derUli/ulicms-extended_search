@@ -39,10 +39,10 @@ class SearchController extends Controller {
 	}
 	public function search($subject, $language) {
 		$subject = strval ( $subject );
-		$sql = "SELECT *, MATCH (`content`) AGAINST (?) AS relevance
+		$sql = "SELECT *, MATCH (``) AGAINST (?) AS relevance
 		FROM `{prefix}fulltext`
 		WHERE MATCH (`content`) AGAINST (?) and language = ?
-		ORDER BY title_relevance DESC, relevance DESC";
+		ORDER BY relevance DESC";
 		$args = array (
 				$subject,
 				$subject,
