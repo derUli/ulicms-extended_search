@@ -1,5 +1,8 @@
 {
 	"source" : "extend",
 	"version" : "0.1",
-	"embed" : false
+	"embed" : false,
+	"controllers" : {
+	"SearchController" : "controllers/search_controllers"
+	}
 }
