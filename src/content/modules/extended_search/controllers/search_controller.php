@@ -29,7 +29,7 @@ class SearchController extends Controller {
 					include_once $fullPath;
 					if (class_exists ( $key )) {
 						$runner = new $key ();
-						if (method_exists ( $runner, "index" )) {
+						if ($runner instanceof Indexer and method_exists ( $runner, "index" )) {
 							$runner->index ();
 						}
 					}
