@@ -30,7 +30,7 @@ class SearchController extends Controller {
 					if (class_exists ( $key )) {
 						$runner = new $key ();
 						if (method_exists ( $runner, "index" )) {
-							$runnter->index ();
+							$runner->index ();
 						}
 					}
 				}
