@@ -1,3 +1,5 @@
 <?php
 $controller = ControllerRegistry::get ( "SearchController" );
-$controller->runAllIndexers ();
+if ($controller) {
+	$controller->runAllIndexers ();
+}
