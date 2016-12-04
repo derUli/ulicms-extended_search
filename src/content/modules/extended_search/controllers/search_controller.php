@@ -19,6 +19,24 @@ class SearchController extends Controller {
 		$sql = "REPLACE INTO `{prefix}fulltext` (`identifier`, `url`, `title`, `content`, `language`) values(?, ?, ?, ?, ?)";
 		return Database::pQuery ( $sql, $args, true );
 	}
+	public function runAllIndexers() {
+		$modules = getAllModules ();
+		foreach ( $modules as $module ) {
+			$indexers = getModuleMeta ( $module, "indexers" );
+			foreach ( $indexers as $key => $value ) {
+				$fullPath = getModulePath ( $module ) . $value;
+				if (file_exists ( $fullPath )) {
+					include_once $fullPath;
+					if (class_exists ( $key )) {
+						$runner = new $key ();
+						if (method_exists ( $runner, "index" )) {
+							$runnter->index ();
+						}
+					}
+				}
+			}
+		}
+	}
 	public function search($subject, $language) {
 		$subject = strval ( $subject );
 		$sql = "SELECT *, MATCH (`content`) AGAINST (?) AS relevance

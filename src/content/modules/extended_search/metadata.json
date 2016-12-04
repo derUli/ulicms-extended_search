@@ -4,5 +4,8 @@
 	"embed" : false,
 	"controllers" : {
 	"SearchController" : "controllers/search_controllers"
+	},
+	"objects" : {
+	"SearchController" : "objects/search_indexer"
 	}
 }
