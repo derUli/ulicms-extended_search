@@ -35,6 +35,7 @@ class IXExtend extends Indexer {
 			$datas = array_filter ( $datas, "strlen" );
 			$content = implode ( " ", $datas );
 			$content = strip_tags ( $content );
+			$content = unhtmlspecialchars($content);
 			$controller->saveDataset ( $identifier, $url, $title, $content, $language );
 		}
 	}
