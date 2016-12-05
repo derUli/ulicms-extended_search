@@ -1,0 +1,7 @@
+{
+	"version" : "0.1",
+	"embed" : false,
+	"indexers" : {
+		"IXExtend" : "ix_extend.php"
+	}
+}
