@@ -1,4 +1,5 @@
 {
+	"source" : "extend",
 	"version" : "0.1",
 	"embed" : false,
 	"indexers" : {
