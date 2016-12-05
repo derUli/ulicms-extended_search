@@ -12,8 +12,8 @@ if (! empty ( $_GET ["q"] )) {
 	<label for="q"><?php translate("search_subject")?></label> <input
 		type="search" required="true" name="q"
 		value="<?php  Template::escape($subject);?>" results="10"
-		autosave="<?php echo md5 ( $_SERVER ["SERVER_NAME"] );?>"> <input type="submit"
-		value="<?php translate("submit");?>">
+		autosave="<?php echo md5 ( $_SERVER ["SERVER_NAME"] );?>"> <input
+		type="submit" value="<?php translate("submit");?>">
 
 </form>
 <?php if($result){?>
@@ -32,6 +32,6 @@ if (! empty ( $_GET ["q"] )) {
 <?php
 } else {
 	?>
-<p><?php translate("no_results_found");?></p>
+<p class="no-results-found"><?php translate("no_results_found");?></p>
 <?php
 }
