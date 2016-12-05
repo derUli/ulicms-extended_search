@@ -16,7 +16,7 @@ if (! empty ( $_GET ["q"] )) {
 		type="submit" value="<?php translate("submit");?>">
 
 </form>
-<?php if($result){?>
+<?php if(!empty ( $subject)){?>
 <?php if(count($result) > 0){?>
 <p>
 <ol class="search-subjects">
