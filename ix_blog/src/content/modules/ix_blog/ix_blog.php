@@ -1,42 +1,44 @@
 <?php
-class IXExtend extends Indexer {
+class I extends Indexer {
 	public function doIndex() {
 		$controller = ControllerRegistry::get ( "SearchController" );
 		if (! $controller) {
 			return;
 		}
-		$args = array (
-				1,
-				"all",
-				"article" 
-		);
-		$sql = "Select id, title, systemname, language, alternate_title, content, excerpt from `{prefix}content` where active = ? and access = ? and `type` = ?";
-		$query = Database::pQuery ( $sql, $args, true );
-		while ( $row = Database::fetchObject ( $query ) ) {
-			$identifier = "extension/" . strval ( $row->id );
-			if (isNotNullOrEmpty ( $row->alternate_title )) {
-				$title = $row->alternate_title;
-			} else {
-				$title = $row->title;
+		$allPages = getAllPages ();
+		$blogPages = array ();
+		foreach ( $allPages as $page ) {
+			if (containsModule ( $page ["systemname"], "blog" )) {
+				$blogPages [$page ["language"]] = $page;
 			}
-			$language = $row->language;
-			$url = $row->systemname . ".html";
-			$datas = array (
-					$row->content,
-					$row->excerpt,
-					$row->alternate_title,
-					$row->title 
+		}
+		if (is_null ( $page )) {
+			return;
+		}
+		foreach ( $blogPages as $page ) {
+			$args = array (
+					1,
+					$page ["language"] 
 			);
-			
-			$cdata = CustomData::get ( $row->systemname );
-			if (isset ( $cdata ["manufacturer"] ) and isNotNullOrEmpty ( $cdata ["manufacturer"] )) {
-				$datas [] = $cdata ["manufacturer"];
+			$sql = "Select id, content_full, content_preview, title, seo_shortname, language from {prefix}blog where entry_enabled = ? and language = ?";
+			$query = Database::pQuery ( $sql, $args, true );
+			while ( $row = Database::fetchObject ( $query ) ) {
+				$identifier = "blog/" . strval ( $row->id );
+				$title = $row->title;
+				$language = $row->language;
+				$url = $page ["systemname"] . ".html?single=" . $row->systemname;
+				$datas = array (
+						$row->title,
+						$row->content_full,
+						$row->content_preview,
+						$row->seo_shortname 
+				);
+				$datas = array_filter ( $datas, "strlen" );
+				$content = implode ( " ", $datas );
+				$content = strip_tags ( $content );
+				$content = unhtmlspecialchars ( $content );
+				$controller->saveDataset ( $identifier, $url, $title, $content, $language );
 			}
-			$datas = array_filter ( $datas, "strlen" );
-			$content = implode ( " ", $datas );
-			$content = strip_tags ( $content );
-			$content = unhtmlspecialchars ( $content );
-			$controller->saveDataset ( $identifier, $url, $title, $content, $language );
 		}
 	}
 }
