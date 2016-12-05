@@ -12,13 +12,13 @@ class I extends Indexer {
 				$blogPages [$page ["language"]] = $page;
 			}
 		}
-		if (is_null ( $page )) {
+		if (count ( $blogPages ) == 0) {
 			return;
 		}
-		foreach ( $blogPages as $language=>$page ) {
+		foreach ( $blogPages as $language => $page ) {
 			$args = array (
 					1,
-					$language
+					$language 
 			);
 			$sql = "Select id, content_full, content_preview, title, seo_shortname, language from {prefix}blog where entry_enabled = ? and language = ?";
 			$query = Database::pQuery ( $sql, $args, true );
