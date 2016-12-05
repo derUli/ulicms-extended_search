@@ -28,10 +28,10 @@ if (! empty ( $_GET ["q"] )) {
 
 	</ol>
 </p>
-<?php }?>
 <?php
-} else {
-	?>
+	} else {
+		?>
 <p class="no-results-found"><?php translate("no_results_found");?></p>
 <?php
+	}
 }
