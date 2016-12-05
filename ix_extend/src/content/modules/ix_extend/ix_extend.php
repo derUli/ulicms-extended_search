@@ -10,12 +10,12 @@ class IXExtend extends Indexer {
 				"all",
 				"article" 
 		);
-		$sql = "Select id, title, systemname, language, headline, content, excerpt from `{prefix}content` where active = ? and access = ? and `type` = ?";
+		$sql = "Select id, title, systemname, language, alternate_title, content, excerpt from `{prefix}content` where active = ? and access = ? and `type` = ?";
 		$query = Database::pQuery ( $sql, $args, true );
 		while ( $row = Database::fetchObject ( $sql ) ) {
 			$identifier = "extension/" . strval ( $row->id );
-			if (isNotNullOrEmpty ( $row->headline )) {
-				$title = $row->headline;
+			if (isNotNullOrEmpty ( $row->alternate_title )) {
+				$title = $row->alternate_title;
 			} else {
 				$title = $row->title;
 			}
@@ -24,7 +24,7 @@ class IXExtend extends Indexer {
 			$datas = array (
 					$row->content,
 					$row->excerpt,
-					$row->headline,
+					$row->alternate_title,
 					$row->title 
 			);
 			
@@ -34,6 +34,7 @@ class IXExtend extends Indexer {
 			}
 			$datas = array_filter ( $datas, "empty" );
 			$content = implode ( " ", $datas );
+			$content = strip_tags ( $content );
 			$controller->saveDataset ( $identifier, $url, $title, $content, $language );
 		}
 	}
