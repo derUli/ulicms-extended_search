@@ -14,7 +14,7 @@ class SearchController extends Controller {
 				$url,
 				$title,
 				$content,
-				$language 
+				$language
 		);
 		$sql = "REPLACE INTO `{prefix}fulltext` (`identifier`, `url`, `title`, `content`, `language`) values (?, ?, ?, ?, ?)";
 		return Database::pQuery ( $sql, $args, true );
@@ -29,8 +29,8 @@ class SearchController extends Controller {
 					include_once $fullPath;
 					if (class_exists ( $key )) {
 						$runner = new $key ();
-						if ($runner instanceof Indexer and method_exists ( $runner, "index" )) {
-							$runner->index ();
+						if ($runner instanceof Indexer and method_exists ( $runner, "doIndex" )) {
+							$runner->doIndex ();
 						}
 					}
 				}
@@ -46,7 +46,7 @@ class SearchController extends Controller {
 		$args = array (
 				$subject,
 				$subject,
-				$language 
+				$language
 		);
 		$query = Database::pQuery ( $sql, $args, true );
 		$result = array ();
