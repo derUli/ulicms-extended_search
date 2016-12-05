@@ -26,7 +26,7 @@ class IXBlog extends Indexer {
 				$identifier = "blog/" . strval ( $row->id );
 				$title = $row->title;
 				$language = $row->language;
-				$url = $page ["systemname"] . ".html?single=" . $row->systemname;
+				$url = $page ["systemname"] . ".html?single=" . $row->seo_shortname;
 				$datas = array (
 						$row->title,
 						$row->content_full,
