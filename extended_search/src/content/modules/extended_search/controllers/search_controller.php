@@ -16,7 +16,7 @@ class SearchController extends Controller {
 				$content,
 				$language 
 		);
-		$sql = "REPLACE INTO `{prefix}fulltext` (`identifier`, `url`, `title`, `content`, `language`) values(?, ?, ?, ?, ?)";
+		$sql = "REPLACE INTO `{prefix}fulltext` (`identifier`, `url`, `title`, `content`, `language`) values (?, ?, ?, ?, ?)";
 		return Database::pQuery ( $sql, $args, true );
 	}
 	public function runAllIndexers() {
