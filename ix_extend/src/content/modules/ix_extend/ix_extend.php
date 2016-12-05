@@ -12,7 +12,7 @@ class IXExtend extends Indexer {
 		);
 		$sql = "Select id, title, systemname, language, alternate_title, content, excerpt from `{prefix}content` where active = ? and access = ? and `type` = ?";
 		$query = Database::pQuery ( $sql, $args, true );
-		while ( $row = Database::fetchObject ( $sql ) ) {
+		while ( $row = Database::fetchObject ( $query ) ) {
 			$identifier = "extension/" . strval ( $row->id );
 			if (isNotNullOrEmpty ( $row->alternate_title )) {
 				$title = $row->alternate_title;
@@ -20,7 +20,7 @@ class IXExtend extends Indexer {
 				$title = $row->title;
 			}
 			$language = $row->language;
-			$url = buildSEOUrl ( $row->systemname );
+			$url = $row->systemname . ".html";
 			$datas = array (
 					$row->content,
 					$row->excerpt,
