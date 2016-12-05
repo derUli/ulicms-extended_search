@@ -15,10 +15,10 @@ class I extends Indexer {
 		if (is_null ( $page )) {
 			return;
 		}
-		foreach ( $blogPages as $page ) {
+		foreach ( $blogPages as $language=>$page ) {
 			$args = array (
 					1,
-					$page ["language"] 
+					$language
 			);
 			$sql = "Select id, content_full, content_preview, title, seo_shortname, language from {prefix}blog where entry_enabled = ? and language = ?";
 			$query = Database::pQuery ( $sql, $args, true );
