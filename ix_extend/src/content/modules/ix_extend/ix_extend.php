@@ -32,7 +32,7 @@ class IXExtend extends Indexer {
 			if (isset ( $cdata ["manufacturer"] ) and isNotNullOrEmpty ( $cdata ["manufacturer"] )) {
 				$datas [] = $cdata ["manufacturer"];
 			}
-			$datas = array_filter ( $datas, "is_null" );
+			$datas = array_filter ( $datas, "empty" );
 			$content = implode ( " ", $datas );
 			$controller->saveDataset ( $identifier, $url, $title, $content, $language );
 		}
