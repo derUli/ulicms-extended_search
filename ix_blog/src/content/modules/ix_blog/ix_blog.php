@@ -1,5 +1,5 @@
 <?php
-class IXBlog extends Indexer {
+class IXBlog extends Indexer { 
 	public function doIndex() {
 		$controller = ControllerRegistry::get ( "SearchController" );
 		if (! $controller) {
