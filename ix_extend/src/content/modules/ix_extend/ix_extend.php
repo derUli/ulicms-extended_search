@@ -10,7 +10,7 @@ class IXExtend extends Indexer {
 				"all",
 				"article" 
 		);
-		$sql = "Select id, title, systemname, language, alternate_title, content, excerpt from `{prefix}content` where active = ? and access = ? and `type` = ?";
+		$sql = "Select id, title, systemname, language, alternate_title, content, excerpt, meta_keywords, meta_description from `{prefix}content` where active = ? and access = ? and `type` = ?";
 		$query = Database::pQuery ( $sql, $args, true );
 		while ( $row = Database::fetchObject ( $query ) ) {
 			$identifier = "extension/" . strval ( $row->id );
