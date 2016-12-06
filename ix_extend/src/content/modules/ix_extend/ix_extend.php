@@ -29,16 +29,7 @@ class IXExtend extends Indexer {
 					$row->meta_description,
 					$row->meta_keywords 
 			);
-			$sql = "Select name, url, comment from {prefix}blog_comments where post_id = ?";
-			$args = array (
-					$row->id 
-			);
-			$queryComments = Database::pQuery ( $sql, $args, true );
-			while ( $row = Database::fetchObject ( $queryComments ) ) {
-				$datas [] = $row->name;
-				$datas [] = $row->url;
-				$datas [] = $row->comment;
-			}
+			
 			$cdata = CustomData::get ( $row->systemname );
 			if (isset ( $cdata ["manufacturer"] ) and isNotNullOrEmpty ( $cdata ["manufacturer"] )) {
 				$datas [] = $cdata ["manufacturer"];
