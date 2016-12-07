@@ -4,7 +4,7 @@ $subject = "";
 if (! empty ( $_GET ["q"] )) {
 	$subject = htmlspecialchars ( $_GET ["q"], ENT_QUOTES, "UTF-8" );
 	$controller = ControllerRegistry::get ( "SearchController" );
-	$result = $controller->search ( $subject, getCurrentLanguage ( true ) );
+	$result = $controller->search ( $subject, getCurrentLanguage ( false ) );
 }
 ?>
 <form action="<?php echo buildSEOURL();?>" class="search-form"
