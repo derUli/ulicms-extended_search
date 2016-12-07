@@ -42,7 +42,7 @@ class IXContent extends Indexer {
 				$datas [] = $row2->value;
 			}
 			
-			if (containsModule ( $page->systemname, "faq" )) {
+			if (containsModule ( $row->systemname, "faq" )) {
 				$sql = "select * from {prefix}faq order by id";
 				$query3 = Database::query ( $sql, true );
 				while ( $row3 = Database::fetchObject ( $query3 ) ) {
