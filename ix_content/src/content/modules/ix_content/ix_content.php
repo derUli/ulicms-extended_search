@@ -42,6 +42,14 @@ class IXContent extends Indexer {
 				$datas [] = $row2->value;
 			}
 			
+			if (containsModule ( $row->systemname, "faq" )) {
+				$sql = "select * from {prefix}faq order by id";
+				$query3 = Database::query ( $sql, true );
+				while ( $row3 = Database::fetchObject ( $query3 ) ) {
+					$datas [] = $row3->question;
+					$datas [] = $row3->answer;
+				}
+			}
 			$datas = array_filter ( $datas, "strlen" );
 			$content = implode ( " ", $datas );
 			$content = strip_tags ( $content );
