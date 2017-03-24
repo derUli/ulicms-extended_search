@@ -1,6 +1,6 @@
 {
 	"source" : "extend",
-	"version" : "0.5",
+	"version" : "1.0",
 	"embed" : true,
 	"controllers" : {
 	"SearchController" : "controllers/search_controller"
