@@ -21,10 +21,11 @@ class SearchController extends Controller {
 	}
 	public function runAllIndexers() {
 		$modules = getAllModules ();
+		$this->truncateSearchIndex ();
 		foreach ( $modules as $module ) {
 			$indexers = getModuleMeta ( $module, "indexers" );
 			foreach ( $indexers as $key => $value ) {
-				$fullPath = getModulePath ( $module ) . $value;
+				$fullPath = getModulePath ( $module, true ) . $value;
 				if (file_exists ( $fullPath )) {
 					include_once $fullPath;
 					if (class_exists ( $key )) {
