@@ -22,6 +22,7 @@ class IXExtend extends Indexer {
 			$language = $row->language;
 			$url = $row->systemname . ".html";
 			$datas = array (
+					$row->systemname,
 					$row->content,
 					$row->excerpt,
 					$row->alternate_title,

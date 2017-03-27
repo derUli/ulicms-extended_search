@@ -11,7 +11,7 @@ class IXContent extends Indexer {
 				"node",
 				"#" 
 		);
-		$sql = "Select id, title, systemname, language, alternate_title, content, excerpt, meta_keywords, meta_description from `{prefix}content` where active = ? and access = ? and `type` <> ? and `redirection` <> ? AND `deleted_at` IS NULL";
+		$sql = "Select id, title, systemname, language, alternate_title, content, excerpt, meta_keywords, meta_description, article_author_name, article_author_email from `{prefix}content` where active = ? and access = ? and `type` <> ? and `redirection` <> ? AND `deleted_at` IS NULL";
 		$query = Database::pQuery ( $sql, $args, true );
 		while ( $row = Database::fetchObject ( $query ) ) {
 			$identifier = "content/" . strval ( $row->id );
@@ -23,6 +23,7 @@ class IXContent extends Indexer {
 			$language = $row->language;
 			$url = $row->systemname . ".html";
 			$datas = array (
+					$row->systemname,
 					$row->content,
 					$row->excerpt,
 					$row->alternate_title,
@@ -30,7 +31,9 @@ class IXContent extends Indexer {
 					$row->meta_description,
 					$row->meta_keywords,
 					$row->redirection,
-					$row->custom_data 
+					$row->custom_data,
+					$row->article_author_name,
+					$row->article_author_email
 			);
 			
 			$sql = "Select value from {prefix}custom_fields where content_id = ?";
