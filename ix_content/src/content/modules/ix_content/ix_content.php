@@ -11,7 +11,7 @@ class IXContent extends Indexer {
 				"node",
 				"#" 
 		);
-		$sql = "Select id, title, systemname, language, alternate_title, content, excerpt, meta_keywords, meta_description from `{prefix}content` where active = ? and access = ? and `type` <> ? and `redirection` <> ?";
+		$sql = "Select id, title, systemname, language, alternate_title, content, excerpt, meta_keywords, meta_description from `{prefix}content` where active = ? and access = ? and `type` <> ? and `redirection` <> ? AND `deleted_at` IS NULL";
 		$query = Database::pQuery ( $sql, $args, true );
 		while ( $row = Database::fetchObject ( $query ) ) {
 			$identifier = "content/" . strval ( $row->id );
