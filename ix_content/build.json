@@ -3,6 +3,6 @@
    "version" : "0.7",
    "description" : "Indexer for general UliCMS content",
    "categories" : ["indexer", "search"],
-   "compatible_from" : "2017.1",
+   "compatible_from" : "2017.3",
    "dependencies" : ["extended_search"]
 }
