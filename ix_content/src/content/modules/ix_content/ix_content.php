@@ -15,7 +15,7 @@ class IXContent extends Indexer {
 		$query = Database::pQuery ( $sql, $args, true );
 		while ( $row = Database::fetchObject ( $query ) ) {
 			$identifier = "content/" . strval ( $row->id );
-			if (isNotNullOrEmpty ( $row->alternate_title )) {
+			if (StringHelper::isNotNullOrEmpty ( $row->alternate_title )) {
 				$title = $row->alternate_title;
 			} else {
 				$title = $row->title;
@@ -33,7 +33,7 @@ class IXContent extends Indexer {
 					$row->redirection,
 					$row->custom_data,
 					$row->article_author_name,
-					$row->article_author_email
+					$row->article_author_email 
 			);
 			
 			$sql = "Select value from {prefix}custom_fields where content_id = ?";

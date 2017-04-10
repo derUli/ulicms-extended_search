@@ -1,6 +1,6 @@
 {
    "id" : "ix_extend",
-   "version" : "0.3",
+   "version" : "0.4",
    "description" : "Indexer for UliCMS eXtend",
    "categories" : ["indexer", "search"],
    "compatible_from" : "2017.1",
