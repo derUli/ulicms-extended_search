@@ -1,0 +1,8 @@
+{
+   "id" : "ix_files",
+   "version" : "0.1",
+   "description" : "Indexer for files",
+   "categories" : ["indexer", "search"],
+   "compatible_from" : "2017.3",
+   "dependencies" : ["extended_search"]
+}
