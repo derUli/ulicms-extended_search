@@ -65,7 +65,7 @@ class IXFiles extends Indexer
     {
         $converter = new PDF2Text();
         $converter->setFilename($file);
-        $converter->setUnicode(true);
+        $converter->setUnicode(false);
         $converter->decodePDF();
         $content = $converter->output();
         return $content;
