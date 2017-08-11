@@ -24,10 +24,13 @@ class IXFiles extends Indexer {
 		$extension = strtolower ( pathinfo ( $file, PATHINFO_EXTENSION ) );
 		switch ($extension) {
 			case "doc" :
-				$content = $this->pdfToText ( $file );
+				$content = $this->docToText ( $file );
 				break;
 			case "txt" :
 				$content = file_get_content_wrapper ( $file );
+				break;
+			case "pdf" :
+				// @TODO: Implented pdf indexing
 				break;
 			default :
 				// default is null
@@ -35,7 +38,7 @@ class IXFiles extends Indexer {
 		}
 		return $content;
 	}
-	public function pdfToText($file) {
+	public function docToText($file) {
 		$pathToAntiword = apply_filter ( "/usr/bin/antiword", "path_to_antiword" );
 		$cmd = "$pathToAntiword " . escapeshellarg ( $file );
 		return shell_exec ( $cmd );
