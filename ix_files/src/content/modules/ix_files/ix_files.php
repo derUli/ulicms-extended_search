@@ -27,7 +27,7 @@ class IXFiles extends Indexer {
 				$content = $this->docToText ( $file );
 				break;
 			case "txt" :
-				$content = file_get_content_wrapper ( $file );
+				$content = file_get_contents ( $file );
 				break;
 			case "pdf" :
 				// @TODO: Implented pdf indexing
