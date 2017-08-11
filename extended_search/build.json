@@ -1,6 +1,6 @@
 {
    "id" : "extended_search",
-   "version" : "1.0",
+   "version" : "1.1",
    "description" : "Extended Search",
    "categories" : ["search"],
    "compatible_from" : "2017.1",
