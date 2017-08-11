@@ -7,13 +7,13 @@ class IXFiles extends Indexer {
 		}
 		$contentFolder = Path::resolve ( "ULICMS_ROOT/content/files" );
 		$files = find_all_files ( $contentFolder );
+		$languages = getAllLanguages ();
 		foreach ( $files as $file ) {
 			$content = $this->getFileContent ( $file );
 			if ($content) {
 				$url = str_replace ( ULICMS_ROOT, '', $file );
 				$identifier = "file/" . md5 ( $url );
 				$title = basename ( $file );
-				$languages = getAllLanguages ();
 				foreach ( $languages as $language ) {
 					$controller->saveDataset ( $identifier, $url, $title, $content, $language );
 				}
