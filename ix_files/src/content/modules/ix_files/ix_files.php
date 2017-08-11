@@ -54,6 +54,10 @@ class IXFiles extends Indexer
     {
         $pathToAntiword = apply_filter("/usr/bin/antiword", "path_to_antiword");
         $cmd = "$pathToAntiword " . escapeshellarg($file);
-        return shell_exec($cmd);
+        $content = shell_exec($cmd);
+        if (startsWith($content, "$file is not a Word Document.")) {
+            $content = null;
+        }
+        return $content;
     }
 }
