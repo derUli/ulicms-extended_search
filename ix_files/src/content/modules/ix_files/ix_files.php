@@ -5,7 +5,7 @@ class IXFiles extends Indexer {
 		if (! $controller) {
 			return;
 		}
-		$contentFolder = Path::resolve ( "ULICMS_ROOT/content" );
+		$contentFolder = Path::resolve ( "ULICMS_ROOT/content/files" );
 		$files = find_all_files ( $contentFolder );
 		foreach ( $files as $file ) {
 			$content = $this->getFileContent ( $file );
