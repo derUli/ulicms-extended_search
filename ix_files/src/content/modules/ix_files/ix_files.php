@@ -10,8 +10,8 @@ class IXFiles extends Indexer {
 		foreach ( $files as $file ) {
 			$content = $this->getFileContent ( $file );
 			if ($content) {
-				$identifier = "file/" . md5 ( $file );
 				$url = str_replace ( ULICMS_ROOT, '', $file );
+				$identifier = "file/" . md5 ( $url );
 				$title = basename ( $file );
 				foreach ( getAllLanguages () as $language ) {
 					$controller->saveDataset ( $identifier, $url, $title, $content, $language );
