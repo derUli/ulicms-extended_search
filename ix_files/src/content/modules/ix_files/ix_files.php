@@ -41,7 +41,7 @@ class IXFiles extends Indexer
                 $content = file_get_contents($file);
                 break;
             case "pdf":
-                // @TODO: Implented pdf indexing
+                $content = $this->pdfToText($file);
                 break;
             default:
                 // default is null
@@ -58,6 +58,16 @@ class IXFiles extends Indexer
         if (startsWith($content, "$file is not a Word Document.")) {
             $content = null;
         }
+        return $content;
+    }
+
+    public function pdfToText($file)
+    {
+        $converter = new PDF2Text();
+        $converter->setFilename($file);
+        $converter->setUnicode(true);
+        $converter->decodePDF();
+        $content = $converter->output();
         return $content;
     }
 }
