@@ -1,8 +1,8 @@
 {
-	"source" : "extend",
-	"version" : "0.1",
-	"embed" : false,
-	"indexers" : {
-		"IXFiles" : "ix_files.php"
+	"source": "extend",
+	"version": "1.0",
+	"embed": false,
+	"indexers": {
+		"IXFiles": "ix_files.php"
 	}
 }

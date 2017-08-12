@@ -1,6 +1,6 @@
 {
 	"id": "ix_files",
-	"version": "0.1",
+	"version": "1.0",
 	"description": "Indexer for files",
 	"categories": [
 		"indexer",
@@ -9,6 +9,8 @@
 	"compatible_from": "2017.3",
 	"dependencies": [
 		"extended_search",
-		"pdf2text"
+		"pdf2text",
+		"pdf2text",
+		
 	]
 }
