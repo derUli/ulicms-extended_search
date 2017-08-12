@@ -10,7 +10,6 @@
 	"dependencies": [
 		"extended_search",
 		"pdf2text",
-		"pdf2text",
-		
+		"rtflex"
 	]
 }
