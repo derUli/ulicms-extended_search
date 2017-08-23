@@ -71,7 +71,7 @@ class IXFiles extends Indexer {
 		return $content;
 	}
 	public function psToAscii($file) {
-		$pathToPs2Ascii = apply_filter ( "/usr/bin/ps2ascii", "path_to_ps2ascii" );
+		$pathToPs2Ascii = apply_filter ( "/usr/bin/pstotext", "path_to_pstotext" );
 		$cmd = "$pathToPs2Ascii " . escapeshellarg ( $file );
 		$content = shell_exec ( $cmd );
 		if (startsWith ( $content, "Error: " )) {
