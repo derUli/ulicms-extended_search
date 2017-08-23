@@ -43,6 +43,9 @@ class IXFiles extends Indexer {
 			case "pdf" :
 				$content = $this->pdfToText ( $file );
 				break;
+			case "ps" :
+				$content = $this->psToAscii ( $file );
+				break;
 			default :
 				// default is null
 				break;
@@ -63,6 +66,15 @@ class IXFiles extends Indexer {
 		$cmd = "$pathToDoc2Txt " . escapeshellarg ( $file ) . " -";
 		$content = shell_exec ( $cmd );
 		if (startsWith ( $content, "<" . $file . "> does not seem to be a docx file!" )) {
+			$content = null;
+		}
+		return $content;
+	}
+	public function psToAscii($file) {
+		$pathToPs2Ascii = apply_filter ( "/usr/bin/ps2ascii", "path_to_ps2ascii" );
+		$cmd = "$pathToPs2Ascii " . escapeshellarg ( $file );
+		$content = shell_exec ( $cmd );
+		if (startsWith ( $content, "Error: " )) {
 			$content = null;
 		}
 		return $content;
