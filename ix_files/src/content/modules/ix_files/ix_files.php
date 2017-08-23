@@ -48,6 +48,10 @@ class IXFiles extends Indexer {
 			case "ps" :
 				$content = $this->psToText ( $file );
 				break;
+			// New in version 2.0
+			case "tex" :
+				$content = $this->texToText ( $file );
+				break;
 			default :
 				// default is null
 				break;
@@ -79,6 +83,12 @@ class IXFiles extends Indexer {
 		if (startsWith ( $content, 'GPL Ghostscript' ) !== false && strpos ( $content, 'Unrecoverable error' ) !== false) {
 			$content = null;
 		}
+		return $content;
+	}
+	public function texToText($file) {
+		$pathToDetex = apply_filter ( "/usr/bin/detex", "path_to_detex" );
+		$cmd = "$pathToDetex " . escapeshellarg ( $file );
+		$content = shell_exec ( $cmd );
 		return $content;
 	}
 	public function rtfToText($file) {
