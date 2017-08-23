@@ -74,7 +74,7 @@ class IXFiles extends Indexer {
 		$pathToPs2Ascii = apply_filter ( "/usr/bin/pstotext", "path_to_pstotext" );
 		$cmd = "$pathToPs2Ascii " . escapeshellarg ( $file );
 		$content = shell_exec ( $cmd );
-		if (startsWith ( $content, "Error: " )) {
+		if (startsWith ( $content, 'GPL Ghostscript' ) !== false && strpos ( $content, 'Unrecoverable error' ) !== false) {
 			$content = null;
 		}
 		return $content;
