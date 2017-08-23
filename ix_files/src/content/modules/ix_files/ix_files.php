@@ -31,6 +31,7 @@ class IXFiles extends Indexer {
 			case "doc" :
 				$content = $this->docToText ( $file );
 				break;
+			// New in version 2.0
 			case "docx" :
 				$content = $this->docxToText ( $file );
 				break;
@@ -43,6 +44,7 @@ class IXFiles extends Indexer {
 			case "pdf" :
 				$content = $this->pdfToText ( $file );
 				break;
+			// New in version 2.0
 			case "ps" :
 				$content = $this->psToAscii ( $file );
 				break;
