@@ -46,7 +46,7 @@ class IXFiles extends Indexer {
 				break;
 			// New in version 2.0
 			case "ps" :
-				$content = $this->psToAscii ( $file );
+				$content = $this->psToText ( $file );
 				break;
 			default :
 				// default is null
@@ -72,7 +72,7 @@ class IXFiles extends Indexer {
 		}
 		return $content;
 	}
-	public function psToAscii($file) {
+	public function psToText($file) {
 		$pathToPs2Ascii = apply_filter ( "/usr/bin/pstotext", "path_to_pstotext" );
 		$cmd = "$pathToPs2Ascii " . escapeshellarg ( $file );
 		$content = shell_exec ( $cmd );
