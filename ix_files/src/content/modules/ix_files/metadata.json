@@ -8,5 +8,9 @@
 	"controllers": {
 		"IXFilesModule": "IXFilesModule.php"
 	},
-	"main_class": "IXFilesModule"
+	"main_class": "IXFilesModule",
+	"custom_acl": [
+		"ix_files_settings"
+	],
+	"admin_permission": "ix_files_settings"
 }
