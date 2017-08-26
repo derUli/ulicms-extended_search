@@ -14,7 +14,7 @@ class IXFiles extends Indexer
         }
         $contentFolder = Path::resolve("ULICMS_ROOT/content/files");
         $files = find_all_files($contentFolder);
-        $languages = getAllLanguages();
+        $languages = function_exists("getAllUsedLanguages") ? getAllUsedLanguages() : getAllLanguages();
         foreach ($files as $file) {
             $content = $this->getFileContent($file);
             if ($content) {
