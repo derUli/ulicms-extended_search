@@ -1,7 +1,4 @@
 <?php
-use RTFLex\io\StreamReader;
-use RTFLex\tokenizer\RTFTokenizer;
-use RTFLex\tree\RTFDocument;
 
 class IXFiles extends Indexer
 {
@@ -69,10 +66,7 @@ class IXFiles extends Indexer
 
     public function rtfToText($file)
     {
-        $reader = new StreamReader($file);
-        $tokenizer = new RTFTokenizer($reader);
-        $doc = new RTFDocument($tokenizer);
-        return $doc->extractText();
+        return rtf2text($file);
     }
 
     public function pdfToText($file)
