@@ -3,6 +3,16 @@
 class IXFiles extends Indexer
 {
 
+    public function getIndexedFiletypes()
+    {
+        $extensions = array();
+        $query = Database::query("select extension from `{prefix}ix_files_types` order by extension", true);
+        while ($row = Database::fetchObject($query)) {
+            $extensions[] = $row->extension;
+        }
+        return $extensions;
+    }
+
     public function doIndex()
     {
         $controller = ControllerRegistry::get("SearchController");
@@ -12,8 +22,9 @@ class IXFiles extends Indexer
         $contentFolder = Path::resolve("ULICMS_ROOT/content/files");
         $files = find_all_files($contentFolder);
         $languages = function_exists("getAllUsedLanguages") ? getAllUsedLanguages() : getAllLanguages();
+        $types = $this->getIndexedFiletypes();
         foreach ($files as $file) {
-            $content = $this->getFileContent($file);
+            $content = $this->getFileContent($file, $types);
             if ($content) {
                 $url = str_replace(ULICMS_ROOT, '', $file);
                 foreach ($languages as $language) {
@@ -26,10 +37,13 @@ class IXFiles extends Indexer
         }
     }
 
-    protected function getFileContent($file)
+    protected function getFileContent($file, $types)
     {
         $content = null;
         $extension = strtolower(pathinfo($file, PATHINFO_EXTENSION));
+        if ($types and ! in_array($extension, $types)) {
+            return null;
+        }
         switch ($extension) {
             case "doc":
                 $content = $this->docToText($file);

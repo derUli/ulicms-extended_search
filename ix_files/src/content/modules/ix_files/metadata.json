@@ -4,5 +4,9 @@
 	"embed": false,
 	"indexers": {
 		"IXFiles": "ix_files.php"
-	}
+	},
+	"controllers": {
+		"IXFilesModule": "IXFilesModule.php"
+	},
+	"main_class": "IXFilesModule"
 }

@@ -1,0 +1,1 @@
+DROP TABLE `{prefix}ix_files_types`; 
