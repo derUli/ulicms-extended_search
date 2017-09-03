@@ -6,7 +6,7 @@
 		"indexer",
 		"search"
 	],
-	"compatible_from": "2017.3",
+	"compatible_from": "2017.4",
 	"dependencies": [
 		"extended_search",
 		"pdf2text",
