@@ -1,0 +1,11 @@
+{
+	"id": "rtf2text",
+	"version": "1.0",
+	"description": "Extract plain text from *.rtf files",
+	"categories": [
+		"converter",
+		"conversion",
+		"rtf"
+	],
+	"compatible_from": "2017.2"
+}

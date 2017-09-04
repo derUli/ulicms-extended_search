@@ -1,10 +1,17 @@
 <?php
-use RTFLex\io\StreamReader;
-use RTFLex\tokenizer\RTFTokenizer;
-use RTFLex\tree\RTFDocument;
 
 class IXFiles extends Indexer
 {
+
+    public function getIndexedFiletypes()
+    {
+        $extensions = array();
+        $query = Database::query("select extension from `{prefix}ix_files_types` order by extension", true);
+        while ($row = Database::fetchObject($query)) {
+            $extensions[] = $row->extension;
+        }
+        return $extensions;
+    }
 
     public function doIndex()
     {
@@ -14,9 +21,10 @@ class IXFiles extends Indexer
         }
         $contentFolder = Path::resolve("ULICMS_ROOT/content/files");
         $files = find_all_files($contentFolder);
-        $languages = getAllLanguages();
+        $languages = function_exists("getAllUsedLanguages") ? getAllUsedLanguages() : getAllLanguages();
+        $types = $this->getIndexedFiletypes();
         foreach ($files as $file) {
-            $content = $this->getFileContent($file);
+            $content = $this->getFileContent($file, $types);
             if ($content) {
                 $url = str_replace(ULICMS_ROOT, '', $file);
                 foreach ($languages as $language) {
@@ -29,10 +37,13 @@ class IXFiles extends Indexer
         }
     }
 
-    protected function getFileContent($file)
+    protected function getFileContent($file, $types)
     {
         $content = null;
         $extension = strtolower(pathinfo($file, PATHINFO_EXTENSION));
+        if ($types and ! in_array($extension, $types)) {
+            return null;
+        }
         switch ($extension) {
             case "doc":
                 $content = $this->docToText($file);
@@ -69,10 +80,7 @@ class IXFiles extends Indexer
 
     public function rtfToText($file)
     {
-        $reader = new StreamReader($file);
-        $tokenizer = new RTFTokenizer($reader);
-        $doc = new RTFDocument($tokenizer);
-        return $doc->extractText();
+        return rtf2text($file);
     }
 
     public function pdfToText($file)
