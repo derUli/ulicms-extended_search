@@ -70,7 +70,9 @@ class IXFiles extends Indexer
                 // default is null
                 break;
         }
+        
         if (is_string($content)) {
+            $content = preg_replace('/\n(\s*\n)+/', "\n", $content); // Quotes are important here.
             $content = trim($content);
         }
         return $content;
@@ -105,6 +107,7 @@ class IXFiles extends Indexer
         $content = shell_exec($cmd);
         return $content;
     }
+
     public function psToText($file)
     {
         $pathToPsToText = apply_filter("/usr/bin/pstotext", "path_to_pstotext");
@@ -112,6 +115,7 @@ class IXFiles extends Indexer
         $content = shell_exec($cmd);
         return $content;
     }
+
     public function rtfToText($file)
     {
         return rtf2text($file);
