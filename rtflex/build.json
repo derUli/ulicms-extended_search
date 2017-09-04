@@ -1,0 +1,10 @@
+{
+	"id": "rtflex",
+	"version": "1.0",
+	"description": "RTFLex is a simple lexer / tokenizer for RTF formatted data",
+	"categories": [
+		"rtf",
+		"converter"
+	],
+	"compatible_from": "2017.1"
+}

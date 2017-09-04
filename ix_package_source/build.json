@@ -1,0 +1,8 @@
+{
+   "id" : "ix_package_source",
+   "version" : "0.1",
+   "description" : "Indexer for Package Source",
+   "categories" : ["indexer", "search"],
+   "compatible_from" : "2017.3",
+   "dependencies" : ["extended_search", "package_source"]
+}

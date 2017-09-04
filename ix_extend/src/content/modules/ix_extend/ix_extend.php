@@ -14,7 +14,7 @@ class IXExtend extends Indexer {
 		$query = Database::pQuery ( $sql, $args, true );
 		while ( $row = Database::fetchObject ( $query ) ) {
 			$identifier = "extension/" . strval ( $row->id );
-			if (isNotNullOrEmpty ( $row->alternate_title )) {
+			if (StringHelper::isNotNullOrEmpty ( $row->alternate_title )) {
 				$title = $row->alternate_title;
 			} else {
 				$title = $row->title;
@@ -22,6 +22,7 @@ class IXExtend extends Indexer {
 			$language = $row->language;
 			$url = $row->systemname . ".html";
 			$datas = array (
+					$row->systemname,
 					$row->content,
 					$row->excerpt,
 					$row->alternate_title,
@@ -31,7 +32,7 @@ class IXExtend extends Indexer {
 			);
 			
 			$cdata = CustomData::get ( $row->systemname );
-			if (isset ( $cdata ["manufacturer"] ) and isNotNullOrEmpty ( $cdata ["manufacturer"] )) {
+			if (isset ( $cdata ["manufacturer"] ) and StringHelper::isNotNullOrEmpty ( $cdata ["manufacturer"] )) {
 				$datas [] = $cdata ["manufacturer"];
 			}
 			$datas = array_filter ( $datas, "strlen" );

@@ -1,0 +1,10 @@
+{
+	"id": "pdf2text",
+	"version": "1.0",
+	"description": "Convert PDF to Plain Text",
+	"categories": [
+		"pdf",
+		"converter"
+	],
+	"compatible_from": "2017.1"
+}

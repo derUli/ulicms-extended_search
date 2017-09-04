@@ -2,7 +2,7 @@
 $result = null;
 $subject = "";
 if (! empty ( $_GET ["q"] )) {
-	$subject = htmlspecialchars ( $_GET ["q"], ENT_QUOTES, "UTF-8" );
+	$subject = $_GET ["q"];
 	$controller = ControllerRegistry::get ( "SearchController" );
 	$result = $controller->search ( $subject, getCurrentLanguage ( false ) );
 }
