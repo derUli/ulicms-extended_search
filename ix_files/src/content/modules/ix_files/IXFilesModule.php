@@ -26,6 +26,7 @@ class IXFilesModule extends Controller
         $types = array(
             "pdf",
             "doc",
+            "docx",
             "txt",
             "rtf"
         );
