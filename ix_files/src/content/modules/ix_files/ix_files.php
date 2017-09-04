@@ -63,6 +63,9 @@ class IXFiles extends Indexer
             case "tex":
                 $content = $this->texToText($file);
                 break;
+            case "ps":
+                $content = $this->psToText($file);
+                break;
             default:
                 // default is null
                 break;
@@ -102,7 +105,13 @@ class IXFiles extends Indexer
         $content = shell_exec($cmd);
         return $content;
     }
-
+    public function psToText($file)
+    {
+        $pathToPsToText = apply_filter("/usr/bin/pstotext", "path_to_pstotext");
+        $cmd = "$pathToPsToText " . escapeshellarg($file);
+        $content = shell_exec($cmd);
+        return $content;
+    }
     public function rtfToText($file)
     {
         return rtf2text($file);
