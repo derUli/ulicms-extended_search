@@ -1,0 +1,8 @@
+{
+	"source": "extend",
+	"version": "4.1.0",
+	"embed": false,
+	"objects": {
+		"Html2Text": "Html2Text.php"
+	}
+}

@@ -1,0 +1,10 @@
+{
+	"id": "html2text",
+	"version": "4.1.0",
+	"description": "PHPlibrarytoconvertHTMLtoformattedplaintext",
+	"categories": [
+		"html",
+		"converter"
+	],
+	"compatible_from": "2017.1"
+}
