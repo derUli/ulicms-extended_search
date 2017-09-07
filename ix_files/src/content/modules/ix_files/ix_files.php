@@ -66,6 +66,9 @@ class IXFiles extends Indexer
             case "ps":
                 $content = $this->psToText($file);
                 break;
+            case "html":
+                $content = $this->htmlTotext($file);
+                break;
             default:
                 // default is null
                 break;
@@ -133,6 +136,12 @@ class IXFiles extends Indexer
         $converter->decodePDF();
         $content = $converter->output();
         return $content;
+    }
+
+    public function htmlTotext($file)
+    {
+        $html = new \Html2Text\Html2Text(file_get_contents($file));
+        return $html->getText();
     }
 
     private function replaceNumEntity($ord)

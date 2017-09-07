@@ -1,7 +1,7 @@
 {
 	"id": "html2text",
 	"version": "4.1.0",
-	"description": "PHPlibrarytoconvertHTMLtoformattedplaintext",
+	"description": "PHP library to convert HTML to formatted plain text",
 	"categories": [
 		"html",
 		"converter"
