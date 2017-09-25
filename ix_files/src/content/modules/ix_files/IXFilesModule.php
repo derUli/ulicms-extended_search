@@ -26,8 +26,12 @@ class IXFilesModule extends Controller
         $types = array(
             "pdf",
             "doc",
+            "docx",
             "txt",
-            "rtf"
+            "rtf",
+            "tex",
+            "ps",
+            "html"
         );
         sort($types);
         return $types;

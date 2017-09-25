@@ -1,0 +1,1 @@
+delete from `{prefix}ix_files_types` where extension = 'docx';
