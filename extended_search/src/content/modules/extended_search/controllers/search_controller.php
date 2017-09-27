@@ -15,6 +15,7 @@ class SearchController extends Controller
         $title = strval($title);
         $content = strval($content);
         $content = preg_replace('/\s+/', ' ', $content);
+        $content = preg_replace('/[ \t]+/', ' ', preg_replace('/[\r\n]+/', "\n", $content));
         $content = preg_replace('/\n(\s*\n)+/', "\n", $content); // Quotes are important here.
         $content = trim($content);
         
