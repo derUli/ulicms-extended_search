@@ -1,5 +1,5 @@
 <?php
-class IXFullcalendar extends Indexer {
+class IXFullCalendar extends Indexer {
 	public function doIndex() {
 		$controller = ControllerRegistry::get ( "SearchController" );
 		if (! $controller) {
