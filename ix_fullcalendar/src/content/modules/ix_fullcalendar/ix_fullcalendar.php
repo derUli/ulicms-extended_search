@@ -12,7 +12,7 @@ class IXFullCalendar extends Indexer {
 		$url = $row->url;
 		$title = $row->title;
 		$content = "{$row->title} {$row->url}";
-		$languages = getAllUsedLanguage();
+		$languages = getAllUsedLanguages();
 		foreach($languages as $language){
 		   $controller->saveDataset ( $identifier, $url, $title, $content, $language );
 		}
