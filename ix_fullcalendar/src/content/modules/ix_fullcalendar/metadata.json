@@ -1,8 +1,8 @@
 {
-	"source" : "extend",
-	"version" : "1.0",
-	"embed" : false,
-	"indexers" : {
-		"IXFullCalendar" : "ix_fullcalendar.php"
-	}
+   "source":"extend",
+   "version":"1.0",
+   "embed":false,
+   "indexers":{
+      "IXFullCalendar":"ix_fullcalendar.php"
+   }
 }
