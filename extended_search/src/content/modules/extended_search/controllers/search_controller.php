@@ -55,10 +55,32 @@ class SearchController extends Controller
     public function search($subject, $language)
     {
         $subject = strval($subject);
+        
+        $customData = CustomData::get();
+        $customData = isset($customData["extended_search"]) ? $customData["extended_search"] : array();
+        
+        $order = isset($customData["order"]) ? $customData["order"] : "relevance";
+        $sort_direction = isset($customData["sort_direction"]) ? $customData["sort_direction"] : "desc";
+        
+        if (! in_array($order, array(
+            "relevance",
+            "title",
+            "url"
+        ))) {
+            $order = "relevance";
+        }
+        
+        if (! in_array($sort_direction, array(
+            "asc",
+            "desc"
+        ))) {
+            $sort_direction = "desc";
+        }
+        
         $sql = "SELECT *, MATCH (`content`) AGAINST (?) AS relevance
 		FROM `{prefix}fulltext`
 		WHERE MATCH (`content`) AGAINST (?) and language = ?
-		ORDER BY relevance DESC";
+		ORDER BY $order $sort_direction";
         $args = array(
             $subject,
             $subject,
