@@ -13,7 +13,8 @@
 	"admin_permission": "search_settings",
 	"custom_acl": [
 		"search_settings",
-		"search_settings_change"
+		"search_settings_change",
+		"search_rebuild_index"
 	],
 	"controller_function_permissions": {
 		"SearchSettingsController::savePost": "search_settings"

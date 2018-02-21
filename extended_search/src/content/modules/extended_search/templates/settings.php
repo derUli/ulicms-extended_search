@@ -57,6 +57,12 @@ foreach ($sortDirections as $direction) {
 </select>
 	</p>
 </fieldset>
+<fieldset>
+	<p>
+		<strong><?php translate("search_index_build_date");?></strong><br />
+<?php echo Settings::get("extended_search_last_index_build_date") ? strftime("%x %X", Settings::get("extended_search_last_index_build_date")) : get_translation("never");?>
+</p>
+</fieldset>
 <p class="voffset3">
 	<button type="submit" class="btn btn-primary"><?php translate("save");?></button>
 </p>
