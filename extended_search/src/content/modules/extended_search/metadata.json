@@ -1,6 +1,6 @@
 {
 	"source": "extend",
-	"version": "1.4",
+	"version": "1.6",
 	"embed": true,
 	"controllers": {
 		"SearchController": "controllers/search_controller",
@@ -17,6 +17,7 @@
 		"search_rebuild_index"
 	],
 	"controller_function_permissions": {
-		"SearchSettingsController::savePost": "search_settings"
+		"SearchSettingsController::savePost": "search_settings",
+		"SearchSettingsController::rebuildNowGet": "search_rebuild_index"
 	}
 }

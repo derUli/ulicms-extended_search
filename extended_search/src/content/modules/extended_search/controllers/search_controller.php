@@ -53,6 +53,12 @@ class SearchController extends Controller
         Settings::set("extended_search_last_index_build_date", time());
     }
 
+    public function rebuildNowGet()
+    {
+        $this->runAllIndexers();
+        Request::redirect(ModuleHelper::buildAdminURL("extended_search", "rebuild=1"));
+    }
+
     public function search($subject, $language)
     {
         $subject = strval($subject);
