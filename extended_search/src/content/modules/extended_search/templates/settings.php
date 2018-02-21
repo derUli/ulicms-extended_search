@@ -52,7 +52,7 @@ foreach ($sortDirections as $direction) {
 ?>
 </select>
 </p>
-<p>
+<p class="voffset3">
 	<button type="submit" class="btn btn-primary"><?php translate("save");?></button>
 </p>
 <?php echo ModuleHelper::endForm()?>
