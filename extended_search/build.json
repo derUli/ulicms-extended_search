@@ -1,10 +1,12 @@
 {
 	"id": "extended_search",
-	"version": "1.7",
+	"version": "1.8",
 	"description": "Extended Search",
 	"categories": [
 		"search"
 	],
 	"compatible_from": "2018.2",
-	"dependencies": []
+	"dependencies": [
+		"better_cron"
+	]
 }

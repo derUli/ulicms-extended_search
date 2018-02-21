@@ -34,6 +34,11 @@ class SearchSettingsController extends MainClass
             } else {
                 Settings::delete("extended_search_rebuild_index_on_clear_cache");
             }
+            if (Request::getVar("extended_search_rebuld_index_cron")) {
+                Settings::set("extended_search_rebuld_index_cron", "1");
+            } else {
+                Settings::delete("extended_search_rebuld_index_cron");
+            }
         }
         Request::redirect(ModuleHelper::buildAdminURL("extended_search", "save=1"));
     }

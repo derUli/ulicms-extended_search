@@ -12,3 +12,4 @@ define("TRANSLATION_SEARCH_INDEX_BUILD_DATE", "Suchindex zuletzt aufgebaut am");
 define("TRANSLATION_REBUILD_INDEX", "Index neu aufbauen");
 define("TRANSLATION_SEARCH_INDEX_WAS_REBUILD", "Der Suchindex wurde neu aufgebaut");
 define("TRANSLATION_REBUILD_INDEX_ON_CLEAR_CACHE", "Suchindex neu aufbauen beim leeren");
+define("TRANSLATION_REBUILD_INDEX_CRON", "Suchindex täglich neu aufbauen (Verwendet better_cron)");

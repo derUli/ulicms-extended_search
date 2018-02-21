@@ -11,5 +11,5 @@ define("TRANSLATION_REBUILD_SEARCH_INDEX_ON_CLEAR_CACHE", "Rebuild search index 
 define("TRANSLATION_SEARCH_INDEX_BUILD_DATE", "Search index last rebuild at");
 define("TRANSLATION_REBUILD_INDEX", "Rebuild Index");
 define("TRANSLATION_SEARCH_INDEX_WAS_REBUILD", "Search index was rebuilt.");
-
 define("TRANSLATION_REBUILD_INDEX_ON_CLEAR_CACHE", "Rebuild search index on clear cache");
+define("TRANSLATION_REBUILD_INDEX_CRON", "Rebuild search index daily (uses better_cron");

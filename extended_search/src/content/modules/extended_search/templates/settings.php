@@ -15,6 +15,7 @@ $sortDirections = array(
 $order = Settings::get("extended_search_order");
 $sort_direction = Settings::get("extended_search_sort_direction");
 $extended_search_rebuild_index_on_clear_cache = Settings::get("extended_search_rebuild_index_on_clear_cache");
+$extended_search_rebuld_index_cron = Settings::get("extended_search_rebuld_index_cron");
 ?>
 <?php if(Request::getVar("save")){?>
 <div class="alert alert-success alert-dismissable fade in">
@@ -70,6 +71,13 @@ foreach ($sortDirections as $direction) {
 			<?php if(!$acl->hasPermission("search_settings_change")) echo "disabled";?>
 			<?php if($extended_search_rebuild_index_on_clear_cache) echo "checked";?>>
 		<label for="extended_search_rebuild_index_on_clear_cache"><?php translate("rebuild_index_on_clear_cache");?></label>
+	</p>
+	<p>
+		<input type="checkbox" name="extended_search_rebuld_index_cron"
+			id="extended_search_rebuld_index_cron" value="1"
+			<?php if(!$acl->hasPermission("search_settings_change")) echo "disabled";?>
+			<?php if($extended_search_rebuld_index_cron) echo "checked";?>> <label
+			for="extended_search_rebuld_index_cron"><?php translate("rebuild_index_cron");?></label>
 	</p>
 </fieldset>
 <fieldset>
