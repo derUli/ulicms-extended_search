@@ -12,7 +12,8 @@
 	"main_class": "SearchSettingsController",
 	"admin_permission": "search_settings",
 	"custom_acl": [
-		"search_settings"
+		"search_settings",
+		"search_settings_change"
 	],
 	"controller_function_permissions": {
 		"SearchSettingsController::savePost": "search_settings"

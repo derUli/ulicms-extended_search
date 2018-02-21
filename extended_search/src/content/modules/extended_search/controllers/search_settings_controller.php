@@ -10,22 +10,25 @@ class SearchSettingsController extends MainClass
 
     public function savePost()
     {
-        $orderOptions = array(
-            "relevance",
-            "title",
-            "url"
-        );
-        
-        $sortDirections = array(
-            "asc",
-            "desc"
-        );
-        
-        if (in_array(Request::getVar("extended_search_order"), $orderOptions)) {
-            Settings::set("extended_search_order", Request::getVar("extended_search_order"));
-        }
-        if (in_array(Request::getVar("extended_search_sort_direction"), $sortDirections)) {
-            Settings::set("extended_search_sort_direction", Request::getVar("extended_search_sort_direction"));
+        $acl = new ACL();
+        if ($acl->hasPermission("search_settings_change")) {
+            $orderOptions = array(
+                "relevance",
+                "title",
+                "url"
+            );
+            
+            $sortDirections = array(
+                "asc",
+                "desc"
+            );
+            
+            if (in_array(Request::getVar("extended_search_order"), $orderOptions)) {
+                Settings::set("extended_search_order", Request::getVar("extended_search_order"));
+            }
+            if (in_array(Request::getVar("extended_search_sort_direction"), $sortDirections)) {
+                Settings::set("extended_search_sort_direction", Request::getVar("extended_search_sort_direction"));
+            }
         }
         Request::redirect(ModuleHelper::buildAdminURL("extended_search", "save=1"));
     }

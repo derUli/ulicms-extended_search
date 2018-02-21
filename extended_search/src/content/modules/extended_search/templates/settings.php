@@ -1,4 +1,5 @@
 <?php
+$acl = new ACL();
 echo ModuleHelper::buildMethodCallForm("SearchSettingsController", "save");
 $orderUptions = array(
     "relevance",
@@ -20,38 +21,42 @@ $sort_direction = Settings::get("extended_search_sort_direction");
 		<?php translate("changes_was_saved")?>
 		</div>
 <?php }?>
-<p>
-	<label for="extended_search_order">
+<fieldset>
+	<p>
+		<label for="extended_search_order">
 <?php translate("order_by");?>
-</label> <select name="extended_search_order" id="extended_search_order">
+</label> <select name="extended_search_order" id="extended_search_order"
+			<?php if(!$acl->hasPermission("search_settings_change")) echo "disabled";?>>
 <?php
 
 foreach ($orderUptions as $option) {
     ?>
 <option value="<?php esc($option)?>"
-			<?php if($option == $order){echo "selected";}?>><?php translate($option);?></option>
+				<?php if($option == $order){echo "selected";}?>><?php translate($option);?></option>
 <?php
 }
 ?>
 </select>
-</p>
+	</p>
 
-<p>
-	<label for="extended_search_sort_direction">
+	<p>
+		<label for="extended_search_sort_direction">
 <?php translate("sort_direction");?>
 </label> <select name="extended_search_sort_direction"
-		id="extended_search_sort_direction">
+			id="extended_search_sort_direction"
+			<?php if(!$acl->hasPermission("search_settings_change")) echo "disabled";?>>
 <?php
 
 foreach ($sortDirections as $direction) {
     ?>
 <option value="<?php esc($direction)?>"
-			<?php if($direction == $sort_direction){echo "selected";}?>><?php translate($direction);?></option>
+				<?php if($direction == $sort_direction){echo "selected";}?>><?php translate($direction);?></option>
 <?php
 }
 ?>
 </select>
-</p>
+	</p>
+</fieldset>
 <p class="voffset3">
 	<button type="submit" class="btn btn-primary"><?php translate("save");?></button>
 </p>
