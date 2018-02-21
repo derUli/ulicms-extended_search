@@ -29,6 +29,11 @@ class SearchSettingsController extends MainClass
             if (in_array(Request::getVar("extended_search_sort_direction"), $sortDirections)) {
                 Settings::set("extended_search_sort_direction", Request::getVar("extended_search_sort_direction"));
             }
+            if (Request::getVar("extended_search_rebuild_index_on_clear_cache")) {
+                Settings::set("extended_search_rebuild_index_on_clear_cache", "1");
+            } else {
+                Settings::delete("extended_search_rebuild_index_on_clear_cache");
+            }
         }
         Request::redirect(ModuleHelper::buildAdminURL("extended_search", "save=1"));
     }

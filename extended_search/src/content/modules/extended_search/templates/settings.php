@@ -14,6 +14,7 @@ $sortDirections = array(
 
 $order = Settings::get("extended_search_order");
 $sort_direction = Settings::get("extended_search_sort_direction");
+$extended_search_rebuild_index_on_clear_cache = Settings::get("extended_search_rebuild_index_on_clear_cache");
 ?>
 <?php if(Request::getVar("save")){?>
 <div class="alert alert-success alert-dismissable fade in">
@@ -62,6 +63,14 @@ foreach ($sortDirections as $direction) {
 ?>
 </select>
 	</p>
+	<p>
+		<input type="checkbox"
+			name="extended_search_rebuild_index_on_clear_cache"
+			id="extended_search_rebuild_index_on_clear_cache" value="1"
+			<?php if(!$acl->hasPermission("search_settings_change")) echo "disabled";?>
+			<?php if($extended_search_rebuild_index_on_clear_cache) echo "checked";?>>
+		<label for="extended_search_rebuild_index_on_clear_cache"><?php translate("rebuild_index_on_clear_cache");?></label>
+	</p>
 </fieldset>
 <fieldset>
 	<p>
@@ -75,14 +84,6 @@ foreach ($sortDirections as $direction) {
 			class="btn btn-default"><?php translate("rebuild_index");?></a>
 	</p>
 <?php }?>
-
-
-
-
-
-
-
-
 </fieldset>
 <p class="voffset3">
 	<button type="submit" class="btn btn-primary"><?php translate("save");?></button>
