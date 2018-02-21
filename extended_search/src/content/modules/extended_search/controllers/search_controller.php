@@ -59,8 +59,11 @@ class SearchController extends Controller
         $customData = CustomData::get();
         $customData = isset($customData["extended_search"]) ? $customData["extended_search"] : array();
         
-        $order = isset($customData["order"]) ? $customData["order"] : "relevance";
-        $sort_direction = isset($customData["sort_direction"]) ? $customData["sort_direction"] : "desc";
+        $order = Settings::get("extended_search_order") ? Settings::get("extended_search_order") : "relevance";
+        $sort_direction = Settings::get("extended_search_sort_direction") ? Settings::get("extended_search_sort_direction") : "desc";
+        
+        $order = isset($customData["order"]) ? $customData["order"] : $order;
+        $sort_direction = isset($customData["sort_direction"]) ? $customData["sort_direction"] : $sort_direction;
         
         if (! in_array($order, array(
             "relevance",
