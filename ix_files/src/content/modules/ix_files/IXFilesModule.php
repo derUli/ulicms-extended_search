@@ -31,7 +31,8 @@ class IXFilesModule extends Controller
             "rtf",
             "tex",
             "ps",
-            "html"
+            "html",
+            "dvi"
         );
         sort($types);
         return $types;

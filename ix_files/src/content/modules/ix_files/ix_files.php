@@ -2,7 +2,7 @@
 
 class IXFiles extends Indexer
 {
-
+    
     public function getIndexedFiletypes()
     {
         $extensions = array();
@@ -12,7 +12,7 @@ class IXFiles extends Indexer
         }
         return $extensions;
     }
-
+    
     public function doIndex()
     {
         $controller = ControllerRegistry::get("SearchController");
@@ -36,7 +36,7 @@ class IXFiles extends Indexer
             }
         }
     }
-
+    
     protected function getFileContent($file, $types)
     {
         $content = null;
@@ -69,6 +69,9 @@ class IXFiles extends Indexer
             case "html":
                 $content = $this->htmlTotext($file);
                 break;
+            case "dvi":
+                $content = $this->dviToText($file);
+                break;
             default:
                 // default is null
                 break;
@@ -79,12 +82,30 @@ class IXFiles extends Indexer
             $content = preg_replace_callback('/&#([0-9a-fx]+);/mi', function ($ord) {
                 return $this->replaceNumEntity($ord);
             }, $content);
-            
-            $content = trim($content);
+                
+                $content = trim($content);
         }
         return $content;
     }
-
+    
+    public function dviToText($file)
+    {
+        $pathToDviType = apply_filter('/usr/bin/dvitype', "path_to_dvitype");
+        $cmd = "$pathToDviType " . escapeshellarg($file);
+        $content = shell_exec($cmd);
+        $lines = StringHelper::linesFromString($content);
+        $filteredLines = array();
+        foreach ($lines as $line) {
+            if (startsWith($line, "[") and endsWith($line, "]")) {
+                $preparedLine = str_replace("[", "", $line);
+                $preparedLine = str_replace("]", "", $preparedLine);
+                $filteredLines[] = $preparedLine;
+            }
+        }
+        $content = implode(" ", $filteredLines);
+        return $content;
+    }
+    
     public function docToText($file)
     {
         $pathToAntiword = apply_filter("/usr/bin/antiword", "path_to_antiword");
@@ -95,7 +116,7 @@ class IXFiles extends Indexer
         }
         return $content;
     }
-
+    
     public function docxToText($file)
     {
         $pathToDoc2Txt = apply_filter("/usr/bin/docx2txt", "path_to_docx2txt");
@@ -106,7 +127,7 @@ class IXFiles extends Indexer
         }
         return $content;
     }
-
+    
     public function texToText($file)
     {
         $pathToDetex = apply_filter("/usr/bin/detex", "path_to_detex");
@@ -114,7 +135,7 @@ class IXFiles extends Indexer
         $content = shell_exec($cmd);
         return $content;
     }
-
+    
     public function psToText($file)
     {
         $pathToPsToText = apply_filter("/usr/bin/pstotext", "path_to_pstotext");
@@ -122,12 +143,12 @@ class IXFiles extends Indexer
         $content = shell_exec($cmd);
         return $content;
     }
-
+    
     public function rtfToText($file)
     {
         return rtf2text($file);
     }
-
+    
     public function pdfToText($file)
     {
         $converter = new PDF2Text();
@@ -137,13 +158,13 @@ class IXFiles extends Indexer
         $content = $converter->output();
         return $content;
     }
-
+    
     public function htmlTotext($file)
     {
         $html = new \Html2Text\Html2Text(file_get_contents($file));
         return $html->getText();
     }
-
+    
     private function replaceNumEntity($ord)
     {
         $ord = $ord[1];
