@@ -2,7 +2,7 @@
 
 class IXFiles extends Indexer
 {
-    
+
     public function getIndexedFiletypes()
     {
         $extensions = array();
@@ -12,21 +12,21 @@ class IXFiles extends Indexer
         }
         return $extensions;
     }
-    
+
     public function doIndex()
     {
         $controller = ControllerRegistry::get("SearchController");
         if (! $controller) {
             return;
         }
-        $contentFolder = Path::resolve("ULICMS_ROOT/content/files");
+        $contentFolder = Path::resolve("ULICMS_DATA_STORAGE_ROOT/content/files");
         $files = find_all_files($contentFolder);
         $languages = function_exists("getAllUsedLanguages") ? getAllUsedLanguages() : getAllLanguages();
         $types = $this->getIndexedFiletypes();
         foreach ($files as $file) {
             $content = $this->getFileContent($file, $types);
             if ($content) {
-                $url = str_replace(ULICMS_ROOT, '', $file);
+                $url = str_replace(ULICMS_DATA_STORAGE_ROOT, '', $file);
                 foreach ($languages as $language) {
                     $fulltext = $file . " " . basename($file) . " " . pathinfo($file, PATHINFO_FILENAME) . pathinfo($file, PATHINFO_FILENAME) . " " . $content;
                     $identifier = "file/" . $language . "/" . md5($url);
@@ -36,7 +36,7 @@ class IXFiles extends Indexer
             }
         }
     }
-    
+
     protected function getFileContent($file, $types)
     {
         $content = null;
@@ -82,12 +82,14 @@ class IXFiles extends Indexer
             $content = preg_replace_callback('/&#([0-9a-fx]+);/mi', function ($ord) {
                 return $this->replaceNumEntity($ord);
             }, $content);
-                
-                $content = trim($content);
+            
+            $content = trim($content);
         }
         return $content;
     }
-    
+
+    // index *.dvi files
+    // see https://github.com/derUli/ulicms-extended_search/issues/50
     public function dviToText($file)
     {
         $pathToDviType = apply_filter('/usr/bin/dvitype', "path_to_dvitype");
@@ -95,6 +97,8 @@ class IXFiles extends Indexer
         $content = shell_exec($cmd);
         $lines = StringHelper::linesFromString($content);
         $filteredLines = array();
+        // remove dvi commands
+        // extract text lines
         foreach ($lines as $line) {
             if (startsWith($line, "[") and endsWith($line, "]")) {
                 $preparedLine = str_replace("[", "", $line);
@@ -105,7 +109,7 @@ class IXFiles extends Indexer
         $content = implode(" ", $filteredLines);
         return $content;
     }
-    
+
     public function docToText($file)
     {
         $pathToAntiword = apply_filter("/usr/bin/antiword", "path_to_antiword");
@@ -116,7 +120,7 @@ class IXFiles extends Indexer
         }
         return $content;
     }
-    
+
     public function docxToText($file)
     {
         $pathToDoc2Txt = apply_filter("/usr/bin/docx2txt", "path_to_docx2txt");
@@ -127,7 +131,7 @@ class IXFiles extends Indexer
         }
         return $content;
     }
-    
+
     public function texToText($file)
     {
         $pathToDetex = apply_filter("/usr/bin/detex", "path_to_detex");
@@ -135,7 +139,7 @@ class IXFiles extends Indexer
         $content = shell_exec($cmd);
         return $content;
     }
-    
+
     public function psToText($file)
     {
         $pathToPsToText = apply_filter("/usr/bin/pstotext", "path_to_pstotext");
@@ -143,12 +147,12 @@ class IXFiles extends Indexer
         $content = shell_exec($cmd);
         return $content;
     }
-    
+
     public function rtfToText($file)
     {
         return rtf2text($file);
     }
-    
+
     public function pdfToText($file)
     {
         $converter = new PDF2Text();
@@ -158,13 +162,13 @@ class IXFiles extends Indexer
         $content = $converter->output();
         return $content;
     }
-    
+
     public function htmlTotext($file)
     {
         $html = new \Html2Text\Html2Text(file_get_contents($file));
         return $html->getText();
     }
-    
+
     private function replaceNumEntity($ord)
     {
         $ord = $ord[1];
