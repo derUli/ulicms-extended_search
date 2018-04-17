@@ -27,6 +27,9 @@ class IXFiles extends Indexer
             $content = $this->getFileContent($file, $types);
             if ($content) {
                 $url = str_replace(ULICMS_DATA_STORAGE_ROOT, '', $file);
+                if(defined("ULICMS_DATA_STORAGE_URL")){
+                    $url = ULICMS_DATA_STORAGE_URL . $url;
+                }
                 foreach ($languages as $language) {
                     $fulltext = $file . " " . basename($file) . " " . pathinfo($file, PATHINFO_FILENAME) . pathinfo($file, PATHINFO_FILENAME) . " " . $content;
                     $identifier = "file/" . $language . "/" . md5($url);
