@@ -29,10 +29,14 @@ class IXPackageSource extends Indexer {
 								}
 								$identifier = $language . "/package_source/" . basename ( $dir ) . "/" . basename ( $package );
 								$url = $page->systemname . ".html?ulicms_version=" . basename ( $dir ) . "&package=" . basename ( $package );
-								$title = get_translation ( "PACKAGE_FOR_VERSION", array (
-										"%paket%" => basename ( $package ),
-										"%version%" => basename ( $dir ) 
-								) );
+								
+								if($language == "de"){
+									$title = "%paket% für UliCMS %version%";
+								} else {
+									$title = "%paket% for UliCMS %version%";
+								}
+								$title = str_replace("%paket%", basename ( $package), $title);
+								$title = str_replace("%version%", basename ( $dir), $title);
 								$content = implode ( " ", array (
 										basename ( $package ),
 										basename ( $package ),
