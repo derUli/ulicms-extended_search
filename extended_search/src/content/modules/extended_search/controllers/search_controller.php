@@ -37,6 +37,9 @@ class SearchController extends Controller
         $this->truncateSearchIndex();
         foreach ($modules as $module) {
             $indexers = getModuleMeta($module, "indexers");
+            if(!$indexers){
+                continue;
+            }
             foreach ($indexers as $key => $value) {
                 $fullPath = getModulePath($module, true) . $value;
                 if (file_exists($fullPath)) {
