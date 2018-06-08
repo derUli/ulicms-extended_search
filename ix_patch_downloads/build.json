@@ -1,0 +1,8 @@
+{
+   "id" : "ix_patch_downloads",
+   "version" : "0.1",
+   "description" : "Indexer for Patches",
+   "categories" : ["indexer", "search"],
+   "compatible_from" : "2018.3",
+   "dependencies" : ["extended_search", "patch_downloads"]
+}

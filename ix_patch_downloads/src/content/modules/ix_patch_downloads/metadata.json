@@ -1,0 +1,8 @@
+{
+	"source" : "extend",
+	"version" : "0.2",
+	"embed" : false,
+	"indexers" : {
+		"IXPatchDownloads" : "IXPatchDownloads.php"
+	}
+}
