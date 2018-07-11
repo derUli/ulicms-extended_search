@@ -10,7 +10,8 @@ class IXExtend extends Indexer {
 				"all",
 				"article" 
 		);
-		$sql = "Select id, title, systemname, language, alternate_title, content, excerpt, meta_keywords, meta_description from `{prefix}content` where active = ? and access = ? and `type` = ?";
+		$sql = "Select id, title, systemname, language, alternate_title, content, excerpt, meta_keywords, 
+		meta_description, article_image, og_image from `{prefix}content` where active = ? and access = ? and `type` = ?";
 		$query = Database::pQuery ( $sql, $args, true );
 		while ( $row = Database::fetchObject ( $query ) ) {
 			$identifier = "extension/" . strval ( $row->id );
@@ -28,8 +29,15 @@ class IXExtend extends Indexer {
 					$row->alternate_title,
 					$row->title,
 					$row->meta_description,
-					$row->meta_keywords 
+					$row->meta_keywords, 
+					$row->article_image 
 			);
+			
+			if($row->article_image and !$row->og_image){
+				$page = ContentFactory::getById($row->id);
+				$page->og_image = $row->article_image;
+				$page->save();
+			}
 			
 			$cdata = CustomData::get ( $row->systemname );
 			if (isset ( $cdata ["manufacturer"] ) and StringHelper::isNotNullOrEmpty ( $cdata ["manufacturer"] )) {
