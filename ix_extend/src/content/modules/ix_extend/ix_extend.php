@@ -43,6 +43,6 @@ class IXExtend extends Indexer {
 			$content = unhtmlspecialchars ( $content );
 			$controller->saveDataset ( $identifier, $url, $title, $content, $language );
 		}
-    Database::query("update {prefix}content set og_image = article_image where article_image is not null and article_image <> '' and (og_image is null or og_image = '')", true);
+      Database::query("update {prefix}content set og_image = article_image where article_image is not null and article_image <> '' and (og_image is null or og_image = '')", true);
 	}
 }
