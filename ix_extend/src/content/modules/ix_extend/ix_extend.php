@@ -33,12 +33,6 @@ class IXExtend extends Indexer {
 					$row->article_image 
 			);
 			
-			if($row->article_image and !$row->og_image){
-				$page = ContentFactory::getById($row->id);
-				$page->og_image = $row->article_image;
-				$page->save();
-			}
-			
 			$cdata = CustomData::get ( $row->systemname );
 			if (isset ( $cdata ["manufacturer"] ) and StringHelper::isNotNullOrEmpty ( $cdata ["manufacturer"] )) {
 				$datas [] = $cdata ["manufacturer"];
@@ -49,5 +43,6 @@ class IXExtend extends Indexer {
 			$content = unhtmlspecialchars ( $content );
 			$controller->saveDataset ( $identifier, $url, $title, $content, $language );
 		}
+    Database::query("update {prefix}content set og_image = article_image where article_image is not null and article_image <> '' and (og_image is null or og_image = '')", true);
 	}
 }
