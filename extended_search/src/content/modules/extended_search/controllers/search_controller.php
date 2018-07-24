@@ -14,6 +14,7 @@ class SearchController extends Controller
         $url = strval($url);
         $title = strval($title);
         $content = strval($content);
+        // remove all characters that are unnecessary for search
         $content = preg_replace('/\s+/', ' ', $content);
         $content = preg_replace('/[ \t]+/', ' ', preg_replace('/[\r\n]+/', "\n", $content));
         $content = preg_replace('/\n(\s*\n)+/', "\n", $content); // Quotes are important here.
@@ -27,17 +28,20 @@ class SearchController extends Controller
             $content,
             $language
         );
+        
         $sql = "REPLACE INTO `{prefix}fulltext` (`identifier`, `url`, `title`, `content`, `language`) values (?, ?, ?, ?, ?)";
         return Database::pQuery($sql, $args, true);
     }
 
     public function runAllIndexers()
     {
+        // iterate over all modules
+        // run registered indexers of every module
         $modules = getAllModules();
         $this->truncateSearchIndex();
         foreach ($modules as $module) {
             $indexers = getModuleMeta($module, "indexers");
-            if(!$indexers){
+            if (! $indexers) {
                 continue;
             }
             foreach ($indexers as $key => $value) {
@@ -46,6 +50,7 @@ class SearchController extends Controller
                     include_once $fullPath;
                     if (class_exists($key)) {
                         $runner = new $key();
+                        // Run method doIndex() of indexers
                         if ($runner instanceof Indexer and method_exists($runner, "doIndex")) {
                             $runner->doIndex();
                         }
@@ -53,19 +58,25 @@ class SearchController extends Controller
                 }
             }
         }
+        // set timestamp of indexing time
         Settings::set("extended_search_last_index_build_date", time());
     }
 
+    // Click on rebuild index now
     public function rebuildNowGet()
     {
         $this->runAllIndexers();
         Request::redirect(ModuleHelper::buildAdminURL("extended_search", "rebuild=1"));
     }
 
+    // searchs for $subject in all index datasets with $language
+    // returns an array of row objects
     public function search($subject, $language)
     {
         $subject = strval($subject);
         
+        // It's possible to override search settings with CustomData
+        // per page
         $customData = CustomData::get();
         $customData = isset($customData["extended_search"]) ? $customData["extended_search"] : array();
         
@@ -75,6 +86,7 @@ class SearchController extends Controller
         $order = isset($customData["order"]) ? $customData["order"] : $order;
         $sort_direction = isset($customData["sort_direction"]) ? $customData["sort_direction"] : $sort_direction;
         
+        // sorting search results
         if (! in_array($order, array(
             "relevance",
             "title",
@@ -83,6 +95,7 @@ class SearchController extends Controller
             $order = "relevance";
         }
         
+        // ascending or descending?
         if (! in_array($sort_direction, array(
             "asc",
             "desc"
@@ -90,6 +103,7 @@ class SearchController extends Controller
             $sort_direction = "desc";
         }
         
+        // query mysql fulltext index
         $sql = "SELECT *, MATCH (`content`) AGAINST (?) AS relevance
 		FROM `{prefix}fulltext`
 		WHERE MATCH (`content`) AGAINST (?) and language = ?
