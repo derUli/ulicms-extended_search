@@ -1,6 +1,6 @@
 {
 	"id": "ix_files",
-	"version": "1.6",
+	"version": "1.7",
 	"description": "Indexer for files",
 	"categories": [
 		"indexer",
