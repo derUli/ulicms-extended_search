@@ -12,9 +12,8 @@ if (! empty ( $_GET ["q"] )) {
 	<label for="q"><?php translate("search_subject")?></label> <input
 		type="search" required="true" name="q"
 		value="<?php  Template::escape($subject);?>" results="10"
-		autosave="<?php echo md5 ( $_SERVER ["SERVER_NAME"] );?>"> <input
-		type="submit" value="<?php translate("submit");?>">
-
+		autosave="<?php echo md5 ( $_SERVER ["SERVER_NAME"] );?>"> 
+		<button type="submit" class="btn btn-primary"><i class="fas fa-search"></i> <?php translate("submit");?></button>
 </form>
 <?php if(!empty ( $subject)){?>
 <?php if(count($result) > 0){?>

@@ -1,12 +1,12 @@
 {
 	"id": "ix_files",
-	"version": "1.7",
+	"version": "1.8",
 	"description": "Indexer for files",
 	"categories": [
 		"indexer",
 		"search"
 	],
-	"compatible_from": "2017.4",
+	"compatible_from": "2019.1.3",
 	"dependencies": [
 		"extended_search",
 		"pdf2text",

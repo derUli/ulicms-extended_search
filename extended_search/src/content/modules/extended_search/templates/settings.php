@@ -89,11 +89,11 @@ foreach ($sortDirections as $direction) {
 <p>
 		<a
 			href="<?php echo ModuleHelper::buildMethodCallUrl("SearchController", "rebuildNow");?>"
-			class="btn btn-default"><?php translate("rebuild_index");?></a>
+			class="btn btn-default"><i class="fas fa-sync"></i> <?php translate("rebuild_index");?></a>
 	</p>
 <?php }?>
 </fieldset>
 <p class="voffset3">
-	<button type="submit" class="btn btn-primary"><?php translate("save");?></button>
+	<button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> <?php translate("save");?></button>
 </p>
 <?php echo ModuleHelper::endForm()?>

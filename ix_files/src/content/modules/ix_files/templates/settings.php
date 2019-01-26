@@ -36,6 +36,6 @@ foreach ($allTypes as $type) {
 ?>
 	</p>
 	<p>
-		<button type="submit" class="btn btn-default"><?php translate("save");?></button>
+		<button type="submit" class="btn btn-default"><i class="fa fa-save"></i> <?php translate("save");?></button>
 	</p>
 </form>
