@@ -18,7 +18,7 @@ class IXContent extends Indexer
             "#"
         );
         // Query content table
-        $sql = "Select id, title, systemname, language, alternate_title, content, excerpt, meta_keywords, meta_description, article_author_name, article_author_email from `{prefix}content` where active = ? and access = ? and `type` <> ? and `redirection` <> ? AND `deleted_at` IS NULL";
+        $sql = "Select id, title, slug, language, alternate_title, content, excerpt, meta_keywords, meta_description, article_author_name, article_author_email from `{prefix}content` where active = ? and access = ? and `type` <> ? and `redirection` <> ? AND `deleted_at` IS NULL";
         $query = Database::pQuery($sql, $args, true);
         while ($row = Database::fetchObject($query)) {
             // every index entry must have an unique identifier string
@@ -29,9 +29,9 @@ class IXContent extends Indexer
                 $title = $row->title;
             }
             $language = $row->language;
-            $url = $row->systemname . ".html";
+            $url = $row->slug . ".html";
             $datas = array(
-                $row->systemname,
+                $row->slug,
                 $row->content,
                 $row->excerpt,
                 $row->alternate_title,
@@ -55,7 +55,7 @@ class IXContent extends Indexer
             }
             
             // indexes frequently asked questions if the "faq" module is installed
-            if (containsModule($row->systemname, "faq")) {
+            if (containsModule($row->slug, "faq")) {
                 $sql = "select * from {prefix}faq order by id";
                 $query3 = Database::query($sql, true);
                 while ($row3 = Database::fetchObject($query3)) {
