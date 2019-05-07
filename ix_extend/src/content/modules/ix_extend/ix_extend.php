@@ -14,7 +14,7 @@ class IXExtend extends Indexer
             "all",
             "article"
         );
-        $sql = "Select id, title, systemname, language, alternate_title, content, excerpt, meta_keywords, 
+        $sql = "Select id, title, slug, language, alternate_title, content, excerpt, meta_keywords, 
 		meta_description, article_image, og_image from `{prefix}content` where active = ? and access = ? and `type` = ?";
         $query = Database::pQuery($sql, $args, true);
         while ($row = Database::fetchObject($query)) {
@@ -25,9 +25,9 @@ class IXExtend extends Indexer
                 $title = $row->title;
             }
             $language = $row->language;
-            $url = $row->systemname . ".html";
+            $url = $row->slug . ".html";
             $datas = array(
-                $row->systemname,
+                $row->slug,
                 $row->content,
                 $row->excerpt,
                 $row->alternate_title,
@@ -37,7 +37,7 @@ class IXExtend extends Indexer
                 $row->article_image
             );
             
-            $cdata = CustomData::get($row->systemname);
+            $cdata = CustomData::get($row->slug);
             if (isset($cdata["manufacturer"]) and StringHelper::isNotNullOrEmpty($cdata["manufacturer"])) {
                 $datas[] = $cdata["manufacturer"];
             }
