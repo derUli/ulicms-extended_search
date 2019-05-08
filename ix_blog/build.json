@@ -1,8 +1,8 @@
 {
    "id" : "ix_blog",
-   "version" : "0.3",
+   "version" : "0.4",
    "description" : "Indexer for Blog Module",
    "categories" : ["indexer", "search"],
-   "compatible_from" : "2017.1",
+   "compatible_from" : "2019.2.8",
    "dependencies" : ["extended_search", "blog"]
 }

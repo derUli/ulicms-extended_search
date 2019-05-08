@@ -13,7 +13,7 @@ class IXBlog extends Indexer
         $blogPages = array();
         // get the pages in any language which contains the blog module
         foreach ($allPages as $page) {
-            if (containsModule($page["systemname"], "blog")) {
+            if (containsModule($page["slug"], "blog")) {
                 $blogPages[$page["language"]] = $page;
             }
         }
@@ -34,7 +34,7 @@ class IXBlog extends Indexer
                 $identifier = "blog/" . strval($row->id);
                 $title = $row->title;
                 $language = $row->language;
-                $url = $page["systemname"] . ".html?single=" . $row->seo_shortname;
+                $url = $page["slug"] . ".html?single=" . $row->seo_shortname;
                 // collect all blog attributes
                 $datas = array(
                     $row->title,
