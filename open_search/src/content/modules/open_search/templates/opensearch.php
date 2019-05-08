@@ -8,7 +8,7 @@ if (! $page) {
 	echo 'Search Module is not included in any page';
 	exit ();
 }
-$page = $page->systemname;
+$page = $page->slug;
 ?>
 <?php echo '<?xml version="1.0" encoding="UTF-8"?> ';?>
 
