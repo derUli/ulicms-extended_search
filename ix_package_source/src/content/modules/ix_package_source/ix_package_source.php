@@ -28,7 +28,7 @@ class IXPackageSource extends Indexer {
 									$description = file_get_contents ( $descFile );
 								}
 								$identifier = $language . "/package_source/" . basename ( $dir ) . "/" . basename ( $package );
-								$url = $page->systemname . ".html?ulicms_version=" . basename ( $dir ) . "&package=" . basename ( $package );
+								$url = $page->slug . ".html?ulicms_version=" . basename ( $dir ) . "&package=" . basename ( $package );
 								
 								if($language == "de"){
 									$title = "%paket% für UliCMS %version%";
