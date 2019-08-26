@@ -1,6 +1,6 @@
 {
    "id" : "ix_content",
-   "version" : "0.8",
+   "version" : "0.9",
    "description" : "Indexer for general UliCMS content",
    "categories" : ["indexer", "search"],
    "compatible_from" : "2019.2.8",

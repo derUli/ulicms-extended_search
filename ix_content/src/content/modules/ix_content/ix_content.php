@@ -14,11 +14,10 @@ class IXContent extends Indexer
         $args = array(
             1,
             "all",
-            "node",
-            "#"
+            "node"
         );
         // Query content table
-        $sql = "Select id, title, slug, language, alternate_title, content, excerpt, meta_keywords, meta_description, article_author_name, article_author_email from `{prefix}content` where active = ? and access = ? and `type` <> ? and `redirection` <> ? AND `deleted_at` IS NULL";
+        $sql = "Select id, title, slug, language, alternate_title, content, excerpt, meta_keywords, meta_description, article_author_name, article_author_email from `{prefix}content` where active = ? and access = ? and `type` <> ? AND `deleted_at` IS NULL";
         $query = Database::pQuery($sql, $args, true);
         while ($row = Database::fetchObject($query)) {
             // every index entry must have an unique identifier string
@@ -63,7 +62,6 @@ class IXContent extends Indexer
                     $datas[] = $row3->answer;
                 }
             }
-            $datas = array_filter($datas, "strlen");
             // join all search data seperated by whitespace
             $content = implode(" ", $datas);
             // remove all html tags
@@ -71,6 +69,7 @@ class IXContent extends Indexer
             // decode htmlspecialchars
             $content = unhtmlspecialchars($content);
             $content = trim($content);
+
             // save index entry in database
             $controller->saveDataset($identifier, $url, $title, $content, $language);
         }
