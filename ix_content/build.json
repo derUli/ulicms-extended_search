@@ -1,8 +1,13 @@
 {
-   "id" : "ix_content",
-   "version" : "0.9",
-   "description" : "Indexer for general UliCMS content",
-   "categories" : ["indexer", "search"],
-   "compatible_from" : "2019.2.8",
-   "dependencies" : ["extended_search"]
+	"id" : "ix_content",
+	"version" : "1.0",
+	"description" : "Indexer for general UliCMS content",
+	"categories" : [
+		"indexer",
+		"search"
+	],
+	"compatible_from" : "2020.1",
+	"dependencies" : [
+		"extended_search"
+	]
 }

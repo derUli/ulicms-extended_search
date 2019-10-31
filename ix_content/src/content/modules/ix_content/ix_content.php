@@ -8,7 +8,7 @@ class IXContent extends Indexer
         $controller = ControllerRegistry::get("SearchController");
         // if the SearchController is null there is something really wrong.
         // this should never happen.
-        if (! $controller) {
+        if (!$controller) {
             return;
         }
         $args = array(
@@ -17,7 +17,8 @@ class IXContent extends Indexer
             "node"
         );
         // Query content table
-        $sql = "Select id, title, slug, language, alternate_title, content, excerpt, meta_keywords, meta_description, article_author_name, article_author_email from `{prefix}content` where active = ? and access = ? and `type` <> ? AND `deleted_at` IS NULL";
+        $sql = "Select id, title, slug, language, alternate_title, content, excerpt, meta_keywords, meta_description, article_author_name, article_author_email, link_url 
+		from `{prefix}content` where active = ? and access = ? and `type` <> ? AND `deleted_at` IS NULL";
         $query = Database::pQuery($sql, $args, true);
         while ($row = Database::fetchObject($query)) {
             // every index entry must have an unique identifier string
@@ -37,7 +38,7 @@ class IXContent extends Indexer
                 $row->title,
                 $row->meta_description,
                 $row->meta_keywords,
-                $row->redirection,
+                $row->link_url,
                 $row->custom_data,
                 $row->article_author_name,
                 $row->article_author_email
